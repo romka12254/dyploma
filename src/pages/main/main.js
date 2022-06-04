@@ -2,6 +2,8 @@ import React, {useEffect} from "react";
 import {Layout} from 'antd';
 import Menu from "../../components/menu/menu";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import Employees from "../../components/employees";
+import Employee from "../../components/employee/employee";
 
 const {Header, Content, Footer} = Layout;
 
@@ -20,7 +22,7 @@ const Main = () => {
             minHeight: '100vh',
         }}
     >
-        <Menu />
+        <Menu/>
         <Layout className="site-layout">
             <Header
                 className="site-layout-background"
@@ -30,7 +32,7 @@ const Main = () => {
             />
             <Content
                 style={{
-                    margin: '0 16px',
+                    margin: '16px',
                 }}
             >
                 {/*<Breadcrumb*/}
@@ -42,8 +44,9 @@ const Main = () => {
                 {/*    <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
                 {/*</Breadcrumb>*/}
                 <Routes>
-                    <Route path='/employees' element={<div>employees page here</div>} />
-                    <Route path='/contacts' element={<div>contacts page here</div>} />
+                    <Route path='/employees' element={<Employees/>}/>
+                    <Route path='/employees/:employeeId' element={<Employee/>}/>
+                    <Route path='/contacts' element={<div>contacts page here</div>}/>
                 </Routes>
             </Content>
             <Footer
