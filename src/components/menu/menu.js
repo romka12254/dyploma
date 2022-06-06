@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {logout} from "../../redux/reducers/auth";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Layout, Menu as AntMenu} from "antd";
 
 import {
     SearchOutlined,
     ContainerOutlined,
     LogoutOutlined,
+    ShoppingCartOutlined,
+    LoginOutlined
 } from '@ant-design/icons';
 import {useLocation, useNavigate} from "react-router-dom";
 
@@ -17,11 +19,13 @@ const Menu = () => {
     const dispatch = useDispatch()
     const {pathname} = useLocation()
     const navigate = useNavigate()
+    const {isAuth} = useSelector(store => store.auth)
+
     const [collapsed, setCollapsed] = useState(false);
     const [activePage, setActivePage] = useState(null)
 
     const getActivePage = () => {
-        const pages = ['employees', 'contacts']
+        const pages = ['employees', 'cart', 'contacts']
         let key
         pages.forEach((i, index) => {
             if (pathname.includes(i)) {
@@ -46,6 +50,14 @@ const Menu = () => {
         },
         {
             key: '1',
+            label: 'Кошик',
+            icon: <ShoppingCartOutlined />,
+            onClick: () => {
+                navigate('/cart')
+            }
+        },
+        {
+            key: '2',
             label: 'Контакти',
             icon: <ContainerOutlined />,
             onClick: () => {
@@ -53,11 +65,11 @@ const Menu = () => {
             }
         },
         {
-            key: '2',
-            label: 'Вихід',
-            icon: <LogoutOutlined />,
+            key: '3',
+            label: isAuth ? 'Вихід' : 'Вхід',
+            icon: isAuth ? <LogoutOutlined /> : <LoginOutlined />,
             onClick: () => {
-                dispatch(logout())
+                isAuth ? dispatch(logout()) : navigate('/auth')
             }
         },
     ]

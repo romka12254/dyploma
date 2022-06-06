@@ -4,8 +4,10 @@ import Menu from "../../components/menu/menu";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Employees from "../../components/employees";
 import Employee from "../../components/employee/employee";
+import Cart from '../../components/cart/cart'
 
 const {Header, Content, Footer} = Layout;
+
 
 const Main = () => {
     const {pathname} = useLocation()
@@ -35,17 +37,10 @@ const Main = () => {
                     margin: '16px',
                 }}
             >
-                {/*<Breadcrumb*/}
-                {/*    style={{*/}
-                {/*        margin: '16px 0',*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    <Breadcrumb.Item>User</Breadcrumb.Item>*/}
-                {/*    <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
-                {/*</Breadcrumb>*/}
                 <Routes>
                     <Route path='/employees' element={<Employees/>}/>
                     <Route path='/employees/:employeeId' element={<Employee/>}/>
+                    <Route path='/cart' element={<Cart />}/>
                     <Route path='/contacts' element={<div>contacts page here</div>}/>
                 </Routes>
             </Content>
