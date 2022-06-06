@@ -8,18 +8,19 @@ import './App.css'
 
 
 const App = () => {
-    const {isAuth} = useSelector(store => store.auth)
-    const navigate = useNavigate()
+    // const {isAuth} = useSelector(store => store.auth)
+    // const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!isAuth) {
-            navigate('/auth')
-        }
-    }, [isAuth])
+    // useEffect(() => {
+    //     if (!isAuth) {
+    //         navigate('/auth')
+    //     }
+    // }, [isAuth])
 
     return (
         <div className='app'>
-            {isAuth && <Main />}
+            {/*{isAuth && <Main />}*/}
+            <Main />
             <Routes>
                 <Route path='/auth' element={<Auth />} />
             </Routes>
