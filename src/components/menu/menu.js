@@ -11,6 +11,9 @@ import {
     LoginOutlined
 } from '@ant-design/icons';
 import {useLocation, useNavigate} from "react-router-dom";
+import {getAuth, signOut} from "firebase/auth";
+import {toast} from "react-toastify";
+import {authErrors} from "../../consts/errorsLabels";
 
 const {Sider} = Layout
 
@@ -23,6 +26,20 @@ const Menu = () => {
 
     const [collapsed, setCollapsed] = useState(false);
     const [activePage, setActivePage] = useState(null)
+
+    const makeLogout = () => {
+        const auth = getAuth()
+        signOut(auth)
+            .then(() => {
+                dispatch(logout())
+            })
+            .catch(() => {
+                toast('Сталася помилка', {
+                    type: 'error',
+                    theme: 'colored'
+                })
+            })
+    }
 
     const getActivePage = () => {
         const pages = ['employees', 'cart', 'contacts']
@@ -69,7 +86,7 @@ const Menu = () => {
             label: isAuth ? 'Вихід' : 'Вхід',
             icon: isAuth ? <LogoutOutlined /> : <LoginOutlined />,
             onClick: () => {
-                isAuth ? dispatch(logout()) : navigate('/auth')
+                isAuth ? makeLogout() : navigate('/login')
             }
         },
     ]
