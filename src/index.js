@@ -7,6 +7,7 @@ import store from './redux/store'
 import {
     BrowserRouter as Router
 } from "react-router-dom";
+import './services/base'
 import 'antd/dist/antd.min.css'
 import './index.css';
 

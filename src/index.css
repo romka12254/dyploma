@@ -1,13 +1,27 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.auth-page {
+  min-height: 100vh;
+  min-width: 100vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  /*background: #2776ea;*/
+
+  color: white;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.auth-page .ant-form {
+  width: 400px;
+  max-width: calc(100vw - 32px);
 }
+
+/*.auth-page .ant-form label{*/
+/*  color: #ffffff;*/
+/*}*/
