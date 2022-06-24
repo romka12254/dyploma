@@ -37,6 +37,7 @@ const Login = () => {
 
     return (
         <AuthForm
+            header='Логін'
             submit={makeLogin}
             link={(
                 <Link to='/register'>

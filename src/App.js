@@ -8,6 +8,8 @@ import Register from "./pages/register/register";
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import {ToastContainer} from "react-toastify";
 import {login} from "./redux/reducers/auth";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "./services/base";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 
@@ -20,12 +22,17 @@ const App = () => {
 
     const checkUser = () => {
         const auth = getAuth()
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const {email, uid: id} = user
-                dispatch(login({
-                    email, id
-                }))
+                const {uid: id} = user
+                const docRef = doc(db, 'users', id)
+                const docSnap = await getDoc(docRef)
+
+                if (docSnap.exists()) {
+                    dispatch(login({
+                        id, ...docSnap.data()
+                    }))
+                }
             }
         })
     }

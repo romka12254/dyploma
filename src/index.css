@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   /*background: #2776ea;*/
 
@@ -21,6 +22,6 @@
   max-width: calc(100vw - 32px);
 }
 
-.auth-page .ant-form label{
-  color: #ffffff;
-}
+/*.auth-page .ant-form label{*/
+/*  color: #ffffff;*/
+/*}*/
