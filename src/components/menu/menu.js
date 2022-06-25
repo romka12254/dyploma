@@ -7,11 +7,11 @@ import {
     SearchOutlined,
     ContainerOutlined,
     LogoutOutlined,
-    ShoppingCartOutlined,
     LoginOutlined,
     UserOutlined,
     PaperClipOutlined,
     UnorderedListOutlined,
+    InsertRowAboveOutlined
 } from '@ant-design/icons';
 import {useLocation, useNavigate} from "react-router-dom";
 import {getAuth, signOut} from "firebase/auth";
@@ -48,25 +48,16 @@ const Menu = () => {
             {
                 key: '0',
                 label: 'Співробітиники',
-                icon: <SearchOutlined />,
+                icon: <SearchOutlined/>,
                 path: 'employees',
                 onClick: () => {
                     navigate('/employees')
                 }
             },
             {
-                key: '1',
-                label: 'Кошик',
-                icon: <ShoppingCartOutlined />,
-                path: 'cart',
-                onClick: () => {
-                    navigate('/cart')
-                }
-            },
-            {
                 key: '2',
                 label: 'Контакти',
-                icon: <ContainerOutlined />,
+                icon: <ContainerOutlined/>,
                 path: 'contacts',
                 onClick: () => {
                     navigate('/contacts')
@@ -75,7 +66,7 @@ const Menu = () => {
             {
                 key: '3',
                 label: isAuth ? 'Вихід' : 'Вхід',
-                icon: isAuth ? <LogoutOutlined /> : <LoginOutlined />,
+                icon: isAuth ? <LogoutOutlined/> : <LoginOutlined/>,
                 path: 'auth',
                 onClick: () => {
                     isAuth ? makeLogout() : navigate('/login')
@@ -84,10 +75,10 @@ const Menu = () => {
         ]
 
         if (isAdmin) {
-            items.unshift( {
+            items.unshift({
                 key: '4',
                 label: 'Користувачі',
-                icon: <UserOutlined />,
+                icon: <UserOutlined/>,
                 path: 'users',
                 onClick: () => {
                     navigate('/users')
@@ -95,7 +86,7 @@ const Menu = () => {
             }, {
                 key: '7',
                 label: 'Заявки',
-                icon: <UnorderedListOutlined />,
+                icon: <UnorderedListOutlined/>,
                 path: 'requests',
                 onClick: () => {
                     navigate('/requests-page')
@@ -107,25 +98,37 @@ const Menu = () => {
             items.unshift({
                 key: '6',
                 label: 'Заявка на співробітництво',
-                icon: <PaperClipOutlined />,
+                icon: <PaperClipOutlined/>,
                 path: 'request-page',
                 onClick: () => {
                     navigate('/request-page')
                 }
             },)
+
         }
 
         if (isAuth) {
             items.unshift({
                 key: '5',
                 label: 'Профіль',
-                icon: <UserOutlined />,
+                icon: <UserOutlined/>,
                 path: 'profile',
                 onClick: () => {
                     navigate('/profile')
                 }
             })
         }
+
+        items.unshift(
+            {
+                key: '8',
+                label: 'Головна',
+                icon: <InsertRowAboveOutlined/>,
+                path: 'about-us',
+                onClick: () => {
+                    navigate('/about-us')
+                }
+            },)
 
         return items
     }

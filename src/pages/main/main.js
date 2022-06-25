@@ -4,14 +4,14 @@ import Menu from "../../components/menu/menu";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Employees from "../../components/employees";
 import Employee from "../../components/employee/employee";
-import Cart from '../../components/cart/cart'
 import Users from '../../components/users/users'
 import User from '../../components/user/user'
 import {useSelector} from "react-redux";
 import Profile from "../../components/profile/profile";
-import Contacts from "../contacts/contacts";
+import Contacts from "../../components/contacts/contacts";
 import RequestPage from "../../components/requestPage/requestPage";
 import RequestsPage from "../../components/requestsPage/requestsPage";
+import AboutUs from "../../components/aboutUs/aboutUs";
 
 const {Header, Content, Footer} = Layout;
 
@@ -46,6 +46,7 @@ const Main = () => {
                 }}
             >
                 <Routes>
+                    <Route path='about-us' element={<AboutUs />} />
                     {isAuth && <Route path='/profile' element={<Profile />} />}
                     {isRegular && <Route path='request-page' element={<RequestPage />} />}
                     {isAdmin && <Route path='/users' element={<Users />} />}
@@ -53,8 +54,9 @@ const Main = () => {
                     {isAdmin && <Route path='/requests-page' element={<RequestsPage />} />}
                     <Route path='/employees' element={<Employees/>}/>
                     <Route path='/employees/:employeeId' element={<Employee/>}/>
-                    <Route path='/cart' element={<Cart />}/>
-                    <Route path='/contacts' element={<Contacts/>}/>
+                    <Route path='contacts' element={<Contacts />} />
+                    <Route path='contacts/:contactId' element={<Contacts />} />
+                    {/*<Route path='/contacts' element={<Contacts/>}/>*/}
                 </Routes>
             </Content>
             <Footer

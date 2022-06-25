@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Breadcrumb, Button, Card} from "antd";
 import {useNavigate, useParams} from "react-router-dom";
-import {employeesList} from "../../consts/employees";
-import {ArrowLeftOutlined} from "@ant-design/icons";
 import {doc, getDoc} from "firebase/firestore";
 import {db} from "../../services/base";
+import {SPECIALIZATIONS} from "../../consts/user";
 
 const {Meta} = Card;
 
@@ -37,31 +36,16 @@ const Employee = () => {
             <Breadcrumb.Item>Співробітники</Breadcrumb.Item>
             <Breadcrumb.Item>{firstName} {lastName}</Breadcrumb.Item>
         </Breadcrumb>
-        <Card
-            hoverable
-            // cover={}
-        >
-            <div style={{ display: 'flex' }}>
-                {/*<Button*/}
-                {/*    style={{ margin: '0 10px 0 -10px' }}*/}
-                {/*    type="primary"*/}
-                {/*    shape="circle"*/}
-                {/*    icon={<ArrowLeftOutlined />}*/}
-                {/*    onClick={() => {*/}
-                {/*        navigate(-1)*/}
-                {/*    }}*/}
-                {/*/>*/}
-                <Meta title={email} description={description} />
-                <img
-                    style={{
-                        marginLeft: '50px',
-                        width: '300px'
-                    }}
-                    alt="example"
-                    src={avatarUrl}
-                />
+        <div style={{ display: 'flex', background: '#fff', padding: '15px' }}>
+            <img style={{marginRight: '20px'}}   height='500px' src={avatarUrl} />
+            <div>
+                <h1 style={{ fontSize: '30px' }} >{firstName} {lastName}</h1>
+                <div style={{ fontSize: '20px', marginBottom: '15px' }}><b>Почта:</b> {email}</div>
+                <div style={{ fontSize: '20px', marginBottom: '15px' }}><b>Спеціалізація:</b> {specializations?.map(i => SPECIALIZATIONS.find(j => j.value === i)?.label).join(', ')}</div>
+                <div>{description}</div>
             </div>
-        </Card>
+            <Button type="primary" onClick={() => {navigate(`/contacts/${employeeId}`)}}>Залишити заявку</Button>
+        </div>
     </>
 }
 

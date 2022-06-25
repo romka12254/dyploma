@@ -1,0 +1,43 @@
+.services {
+    text-align: center;
+    background: white;
+    padding: 50px 0 100px;
+    color: rgb(68, 63, 63);
+}
+
+.services .title {
+    font-size: 40px;
+}
+
+.services .sub-title {
+    font-size: 16px;
+}
+
+.services-items {
+    display: flex;
+    margin-top: 50px;
+}
+
+/*.services-item {*/
+    /*padding: 0 20px;*/
+/*}*/
+
+.services-item img {
+    max-width: 100%;
+}
+
+.services-item .label {
+    text-align: center;
+    color: rgb(68, 63, 63);
+    font-size: 32px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.services-item .description {
+    padding: 0 20px;
+}
+
+.about {
+    margin-top: 50px;
+}

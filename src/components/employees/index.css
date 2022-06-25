@@ -1,7 +1,18 @@
 .card-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     margin-top: 25px;
+}
+
+.ant-card-cover {
+    display: flex;
+    justify-content: center;
+}
+
+.ant-card-meta {
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
