@@ -41,7 +41,7 @@ const Employees = () => {
             <Breadcrumb.Item>Співробітники</Breadcrumb.Item>
         </Breadcrumb>
         <Row gutter={[16, 24]}>
-            {employees.map(e => {
+            {employees && employees?.map(e => {
                 const {id, firstName, lastName, description, avatarUrl} = e
                 const isInCart = cart.includes(id)
                 return (

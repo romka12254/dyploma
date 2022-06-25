@@ -22,7 +22,7 @@ const Contacts = () => {
         if (docSnap.exists()) {
             await updateDoc(docRef, {
                 messages: {...docSnap.messages, message}
-            })
+            });
         } else {
             await setDoc(doc(db, 'admin', 'messages'), {
                 messages: [message]
@@ -46,7 +46,7 @@ const Contacts = () => {
             </Space>
             <Space direction="vertical" size="middle" style={{ display: 'flex', marginBottom:'20px', width:'35%'}}>
                 <Card title='Залиште нам повідомлення' size="small">
-                    <form onSubmit={sendMessage}>
+                    <form onSubmit={() => sendMessage()}>
                         <Row className='row'>
                             <Col span={12} className='col'>
                                 <input

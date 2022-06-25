@@ -3,6 +3,7 @@ import {collection, deleteDoc, doc, getDocs, updateDoc} from "firebase/firestore
 import {db} from "../../services/base";
 import {SettingOutlined, CloseOutlined, CheckOutlined} from "@ant-design/icons";
 import {Avatar, Button, Spin, Table} from "antd";
+import {SPECIALIZATIONS} from "../../consts/user";
 
 const RequestsPage = () => {
     const [loading, setLoading] = useState(false)
@@ -33,8 +34,7 @@ const RequestsPage = () => {
             title: 'Спеціалізація',
             dataIndex: 'specializations',
             key: 'specializations',
-            render: (value) => value.join(', ')
-        },
+            render: (list) => list.map(i => SPECIALIZATIONS.find(j => j.value === i)?.label).join(', ')        },
         {
             title: <SettingOutlined />,
             dataIndex: '',

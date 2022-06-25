@@ -125,7 +125,7 @@ const User = () => {
                     <Form.Item shouldUpdate noStyle>
                         {() => form.getFieldValue('role') === 'employee' && <Col span={12}>
                             <Form.Item label='Спеціалізація' name='specializations'>
-                                <Select>
+                                <Select mode='multiple'>
                                     {SPECIALIZATIONS.map(r => (
                                         <Option key={r.value} value={r.value}>{r.label}</Option>
                                     ))}

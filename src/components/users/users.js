@@ -7,6 +7,7 @@ import {List, Skeleton, Avatar, Button, Table} from "antd";
 import {Link, useNavigate} from "react-router-dom";
 import {ArrowRightOutlined, DeleteOutlined, SettingOutlined} from "@ant-design/icons";
 import {getAuth, deleteUser, signInWithEmailAndPassword} from "firebase/auth";
+import {ROLES, SPECIALIZATIONS} from "../../consts/user";
 
 const Users = () => {
     const dispatch = useDispatch()
@@ -71,11 +72,13 @@ const Users = () => {
             title: 'Роль',
             dataIndex: 'role',
             key: 'role',
+            render: (role) => ROLES.find(j => j.value === role)?.label
         },
         {
             title: 'Спеціалізація',
             dataIndex: 'specializations',
             key: 'specializations',
+            render: (list) => list.map(i => SPECIALIZATIONS.find(j => j.value === i)?.label).join(', ')
         },
         {
             title: <SettingOutlined />,
