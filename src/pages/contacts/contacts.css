@@ -1,0 +1,22 @@
+.icon{
+    width: 50px;
+}
+.icon:hover {
+    color: dodgerblue;
+}
+
+.link {
+    color: black;
+}
+.link:hover {
+    color: dodgerblue;
+}
+
+.row {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.col {
+    padding: 0 10px;
+}

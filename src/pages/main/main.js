@@ -9,6 +9,7 @@ import Users from '../../components/users/users'
 import User from '../../components/user/user'
 import {useSelector} from "react-redux";
 import Profile from "../../components/profile/profile";
+import Contacts from "../contacts/contacts";
 
 const {Header, Content, Footer} = Layout;
 
@@ -34,8 +35,8 @@ const Main = () => {
             <PageHeader
                 className="site-page-header"
                 onBack={() => navigate(-1)}
-                title="Title"
-                subTitle="This is a subtitle"
+                title="Назад"
+                subTitle="Повернення до попередньої сторінки"
             />
             <Content
                 style={{
@@ -49,7 +50,7 @@ const Main = () => {
                     <Route path='/employees' element={<Employees/>}/>
                     <Route path='/employees/:employeeId' element={<Employee/>}/>
                     <Route path='/cart' element={<Cart />}/>
-                    <Route path='/contacts' element={<div>contacts page here</div>}/>
+                    <Route path='/contacts' element={<Contacts/>}/>
                 </Routes>
             </Content>
             <Footer
