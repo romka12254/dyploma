@@ -10,6 +10,8 @@ import User from '../../components/user/user'
 import {useSelector} from "react-redux";
 import Profile from "../../components/profile/profile";
 import Contacts from "../contacts/contacts";
+import RequestPage from "../../components/requestPage/requestPage";
+import RequestsPage from "../../components/requestsPage/requestsPage";
 
 const {Header, Content, Footer} = Layout;
 
@@ -17,7 +19,7 @@ const {Header, Content, Footer} = Layout;
 const Main = () => {
     const {pathname} = useLocation()
     const navigate = useNavigate()
-    const { isAdmin, isAuth } = useSelector(store => store.auth)
+    const { isAdmin, isAuth, isRegular } = useSelector(store => store.auth)
 
     useEffect(() => {
         if (pathname === '/') {
@@ -45,8 +47,10 @@ const Main = () => {
             >
                 <Routes>
                     {isAuth && <Route path='/profile' element={<Profile />} />}
+                    {isRegular && <Route path='request-page' element={<RequestPage />} />}
                     {isAdmin && <Route path='/users' element={<Users />} />}
                     {isAdmin && <Route path='/users/:userId' element={<User />} />}
+                    {isAdmin && <Route path='/requests-page' element={<RequestsPage />} />}
                     <Route path='/employees' element={<Employees/>}/>
                     <Route path='/employees/:employeeId' element={<Employee/>}/>
                     <Route path='/cart' element={<Cart />}/>

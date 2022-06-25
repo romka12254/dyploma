@@ -9,7 +9,9 @@ import {
     LogoutOutlined,
     ShoppingCartOutlined,
     LoginOutlined,
-    UserOutlined
+    UserOutlined,
+    PaperClipOutlined,
+    UnorderedListOutlined,
 } from '@ant-design/icons';
 import {useLocation, useNavigate} from "react-router-dom";
 import {getAuth, signOut} from "firebase/auth";
@@ -22,7 +24,7 @@ const Menu = () => {
     const dispatch = useDispatch()
     const {pathname} = useLocation()
     const navigate = useNavigate()
-    const {isAuth, isAdmin} = useSelector(store => store.auth)
+    const {isAuth, isAdmin, isRegular} = useSelector(store => store.auth)
 
     const [collapsed, setCollapsed] = useState(false);
     const [activePage, setActivePage] = useState(null)
@@ -90,7 +92,27 @@ const Menu = () => {
                 onClick: () => {
                     navigate('/users')
                 }
+            }, {
+                key: '7',
+                label: 'Заявки',
+                icon: <UnorderedListOutlined />,
+                path: 'requests',
+                onClick: () => {
+                    navigate('/requests-page')
+                }
             })
+        }
+
+        if (isRegular) {
+            items.unshift({
+                key: '6',
+                label: 'Заявка на співробітництво',
+                icon: <PaperClipOutlined />,
+                path: 'request-page',
+                onClick: () => {
+                    navigate('/request-page')
+                }
+            },)
         }
 
         if (isAuth) {
@@ -102,7 +124,7 @@ const Menu = () => {
                 onClick: () => {
                     navigate('/profile')
                 }
-            },)
+            })
         }
 
         return items

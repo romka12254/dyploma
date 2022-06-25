@@ -6,6 +6,9 @@ import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {toast} from "react-toastify";
 import {authErrors} from "../../consts/errorsLabels";
 import AuthForm from "../../components/authForm/authForm";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../../services/base";
+import {setRequest} from "../../redux/reducers/request";
 
 
 const Login = () => {
@@ -15,10 +18,25 @@ const Login = () => {
     const makeLogin = ({email, password}) => {
         const auth = getAuth()
         signInWithEmailAndPassword(auth, email, password)
-            .then(({user}) => {
+            .then(async ({user}) => {
                 if (user) {
-                    const {email, uid: id} = user
-                    dispatch(login({email, id}))
+                    const {uid: id} = user
+                    const reqRef = doc(db, 'requests', id)
+                    const docRef = doc(db, 'users', id)
+                    const docSnap = await getDoc(docRef)
+                    const reqSnap = await getDoc(reqRef)
+
+                    if (reqSnap.exists()) {
+                        dispatch(setRequest({
+                            ...reqSnap.data()
+                        }))
+                    }
+
+                    if (docSnap.exists()) {
+                        dispatch(login({
+                            id, ...docSnap.data()
+                        }))
+                    }
                     navigate('/')
 
                     toast('Ви успішно увійшли в аккаунт', {

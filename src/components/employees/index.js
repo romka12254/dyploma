@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Breadcrumb, Button, Card, Col, notification, Row} from "antd";
 import {employeesList} from "../../consts/employees";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import './index.css'
 import {addToCart, removeFromCart} from "../../redux/reducers/cart";
+import {collection, getDocs} from "firebase/firestore";
+import {db} from "../../services/base";
+import './index.css'
 
 const {Meta} = Card;
 
@@ -12,6 +14,23 @@ const Employees = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const {items: cart} = useSelector(store => store.cart)
+    const [employees, setEmployees] = useState(null)
+
+    const getEmployees = async () => {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        const items = []
+        querySnapshot.forEach((doc) => {
+            const docData = doc.data()
+            if (docData.role === 'employee') {
+                items.push({ id: doc.id, ...docData })
+            }
+        });
+        setEmployees(items)
+    }
+
+    useEffect(() => {
+        getEmployees()
+    }, [])
 
     return <>
         <Breadcrumb
@@ -22,15 +41,16 @@ const Employees = () => {
             <Breadcrumb.Item>Співробітники</Breadcrumb.Item>
         </Breadcrumb>
         <Row gutter={[16, 24]}>
-            {employeesList.map(({id, name, description, img}, i) => {
+            {employees.map(e => {
+                const {id, firstName, lastName, description, avatarUrl} = e
                 const isInCart = cart.includes(id)
                 return (
-                    <Col key={i} xs={24} md={12} xl={8} xxl={6}>
+                    <Col key={e.id} xs={24} md={12} xl={8} xxl={6}>
                         <Card
                             // hoverable
-                            cover={<img alt="example" src={img}/>}
+                            cover={<img alt="example" src={avatarUrl}/>}
                         >
-                            <Meta title={name} description={description}/>
+                            <Meta title={`${firstName} ${lastName}`} description={description}/>
                             <div className="card-footer">
                                 <Button
                                     type='danger'

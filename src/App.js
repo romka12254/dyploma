@@ -10,6 +10,7 @@ import {ToastContainer} from "react-toastify";
 import {login} from "./redux/reducers/auth";
 import {doc, getDoc} from "firebase/firestore";
 import {db} from "./services/base";
+import {setRequest} from "./redux/reducers/request";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 
@@ -25,8 +26,16 @@ const App = () => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const {uid: id} = user
+                const reqRef = doc(db, 'requests', id)
                 const docRef = doc(db, 'users', id)
                 const docSnap = await getDoc(docRef)
+                const reqSnap = await getDoc(reqRef)
+
+                if (reqSnap.exists()) {
+                    dispatch(setRequest({
+                        ...reqSnap.data()
+                    }))
+                }
 
                 if (docSnap.exists()) {
                     dispatch(login({
